@@ -1,5 +1,6 @@
 package com.example.restservice.util;
 
+import com.example.restservice.model.enums.LoanType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +9,9 @@ import com.example.restservice.model.Loan;
 
 public class LoanGeneratonUtil {
 
-	public static String LOAN_TYPE_STUDENT = "student";
-	public static String LOAN_TYPE_CONSUMER = "consumer";
-
 	public static Loan createLoan(Long loanId) {
-		String loanType = loanId % 2 == 0 ? LOAN_TYPE_STUDENT : LOAN_TYPE_CONSUMER;
+		String loanType = loanId % 2 == 0 ? LoanType.STUDENT.value() : LoanType.CONSUMER.value();
+
 		Borrower borrower = new Borrower();
 		borrower.setName("Borrower ".concat(loanId.toString()));
 		borrower.setAge(23);
@@ -22,7 +21,7 @@ public class LoanGeneratonUtil {
 		borrower.setCreditHistory(50);
 
 		Loan loan = new Loan();
-		loan.setLoanId(loanId);
+		loan.setId(loanId);
 		loan.setRequestedAmount(1000D * loanId);
 		loan.setTermMonths(loanId % 2 == 0 ? 36 : 60);
 		loan.setAnnualInterest(0.2 * (loanId / (loanId + 1)));
@@ -33,9 +32,9 @@ public class LoanGeneratonUtil {
 	}
 	
 	public static List<Loan> getRandomLoans(Long numberOfLoans) {
-		List<Loan> loans = new ArrayList<Loan>();
-		for (Integer x = 1; x <= numberOfLoans; x++) {
-			loans.add(createLoan(Long.valueOf(x)));
+		List<Loan> loans = new ArrayList<>();
+		for (int x = 1; x <= numberOfLoans; x++) {
+			loans.add(createLoan((long) x));
 		}
 		return loans;
 	}

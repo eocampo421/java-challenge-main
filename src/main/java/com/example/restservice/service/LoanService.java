@@ -1,33 +1,15 @@
 package com.example.restservice.service;
 
-import java.util.List;
+import com.example.restservice.dto.LoanMetricDTO;
+import com.example.restservice.model.vo.LoanVO;
 
-import org.springframework.stereotype.Service;
+public interface LoanService {
 
-import com.example.restservice.model.Loan;
-import com.example.restservice.model.LoanMetric;
-import com.example.restservice.util.LoanGeneratonUtil;
+    LoanMetricDTO calculateLoanMetric(final LoanVO loanVO);
 
-@Service
-public class LoanService {
+    LoanMetricDTO calculateLoanMetric(final Long loanId);
 
-	public Loan getLoan(Long id) {
-		return LoanGeneratonUtil.createLoan(id);
-	}
+    LoanVO getLoan(final Long id);
 
-	public LoanMetric calculateLoanMetric(Loan loan) {
-		// Use the LoanMetricFactory based on the loan type
-		return null;
-	}
-
-	public LoanMetric calculateLoanMetric(Long loanId) {
-		// Call getLoan(loanId)
-		return null;
-	}
-
-	public Loan getMaxMonthlyPaymentLoan() {
-		List<Loan> allLoans = LoanGeneratonUtil.getRandomLoans(20L);
-		// get the loan with the max monthly payment
-		return null;
-	}
+    LoanVO getMaxMonthlyPaymentLoan();
 }

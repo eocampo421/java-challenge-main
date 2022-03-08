@@ -1,60 +1,42 @@
 package com.example.restservice.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "loan")
 public class Loan {
 
-	private Long loanId;
-	private Double requestedAmount;
-	private Integer termMonths;
-	private Double annualInterest;
-	private String type;
-	private Borrower borrower;
+    @Id
+    private Long id;
 
-	public Long getLoanId() {
-		return loanId;
-	}
+    @Column(name = "requested_amount")
+    private Double requestedAmount;
 
-	public void setLoanId(Long loanId) {
-		this.loanId = loanId;
-	}
+    @Column(name = "term_months")
+    private Integer termMonths;
 
-	public double getRequestedAmount() {
-		return requestedAmount;
-	}
+    @Column(name = "annual_interest")
+    private Double annualInterest;
 
-	public void setRequestedAmount(Double requestedAmount) {
-		this.requestedAmount = requestedAmount;
-	}
+    @Column(name = "type")
+    private String type;
 
-	public int getTermMonths() {
-		return termMonths;
-	}
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "loan")
+    private Borrower borrower;
 
-	public void setTermMonths(Integer termMonths) {
-		this.termMonths = termMonths;
-	}
-
-	public double getAnnualInterest() {
-		return annualInterest;
-	}
-
-	public void setAnnualInterest(Double annualInterest) {
-		this.annualInterest = annualInterest;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Borrower getBorrower() {
-		return borrower;
-	}
-
-	public void setBorrower(Borrower borrower) {
-		this.borrower = borrower;
-	}
-
+    public void setBorrower(final Borrower borrower) {
+        borrower.setLoan(this);
+        this.borrower = borrower;
+    }
 }

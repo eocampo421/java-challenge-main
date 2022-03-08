@@ -1,60 +1,45 @@
 package com.example.restservice.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "borrower")
 public class Borrower {
 
-	private String name;
-	private Integer age;
-	private Double annualIncome;
-	private Boolean delinquentDebt;
-	private Double annualDebt;
-	private Integer creditHistory;
+    @Id
+    private Long id;
 
-	public String getName() {
-		return name;
-	}
+    @Column(name = "name")
+    private String name;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Column(name = "age")
+    private Integer age;
 
-	public Integer getAge() {
-		return age;
-	}
+    @Column(name = "annual_income")
+    private Double annualIncome;
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+    @Column(name = "delinquent_debt")
+    private Boolean delinquentDebt;
 
-	public Double getAnnualIncome() {
-		return annualIncome;
-	}
+    @Column(name = "annual_debt")
+    private Double annualDebt;
 
-	public void setAnnualIncome(Double annualIncome) {
-		this.annualIncome = annualIncome;
-	}
+    @Column(name = "credit_history")
+    private Integer creditHistory;
 
-	public Boolean getDelinquentDebt() {
-		return delinquentDebt;
-	}
-
-	public void setDelinquentDebt(Boolean delinquentDebt) {
-		this.delinquentDebt = delinquentDebt;
-	}
-
-	public Double getAnnualDebt() {
-		return annualDebt;
-	}
-
-	public void setAnnualDebt(Double annualDebt) {
-		this.annualDebt = annualDebt;
-	}
-
-	public Integer getCreditHistory() {
-		return creditHistory;
-	}
-
-	public void setCreditHistory(Integer creditHistory) {
-		this.creditHistory = creditHistory;
-	}
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "id")
+    private Loan loan;
 }
