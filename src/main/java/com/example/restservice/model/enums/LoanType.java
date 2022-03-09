@@ -18,7 +18,7 @@ public enum LoanType {
 
     public static LoanType fromString(String type) {
         return stream(LoanType.values()).
-            filter(loanType -> loanType.type.equalsIgnoreCase(type))
+            filter(loanType -> loanType.type.equals(type))
             .findFirst().get();
     }
 }

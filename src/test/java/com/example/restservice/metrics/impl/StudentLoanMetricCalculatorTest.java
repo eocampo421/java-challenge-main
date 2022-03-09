@@ -37,6 +37,10 @@ class StudentLoanMetricCalculatorTest {
         assertThat(studentLoanMetric.getMonthlyPayment()).isEqualTo(354.56D);
     }
 
+    /////////////////////
+    // Private Methods //
+    /////////////////////
+
     private LoanVO getLoanVO(final String loanType) {
         return LoanVO.builder()
             .loanId(4L)

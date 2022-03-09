@@ -106,7 +106,6 @@ class LoanControllerTest {
         assertThat(result.getResponse().getStatus()).isEqualTo(OK.value());
     }
 
-
     @Test
     void getLoan_loanNotFoundException() throws Exception {
 
@@ -132,13 +131,16 @@ class LoanControllerTest {
             .andExpect(jsonPath("$.detail").value("Unexpected error occurred"));
     }
 
+    /////////////////////
+    // Private Methods //
+    /////////////////////
+
     private ResultActions performGetRequest(final String urlTemplate) throws Exception {
         return mockMvc.perform(
             get(URL_BASE + urlTemplate, LOAN_ID)
                 .accept(MediaType.APPLICATION_JSON)
         );
     }
-
 
     private ResultActions performPostRequest(final String jsonRequest, final String path) throws Exception {
         return mockMvc.perform(

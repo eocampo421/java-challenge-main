@@ -18,6 +18,7 @@ import com.example.restservice.service.LoanService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
@@ -93,7 +94,7 @@ public class LoanServiceImpl implements LoanService {
         double maxMonthlyPayment = MIN_VALUE;
         LoanVO loanVO = null;
 
-        for (Map.Entry<LoanMetricDTO, LoanVO> entry : loanMetricWithLoanMap.entrySet()) {
+        for (val entry : loanMetricWithLoanMap.entrySet()) {
             val loanMetricDTO = entry.getKey();
             if (loanMetricDTO.getMonthlyPayment() > maxMonthlyPayment) {
                 maxMonthlyPayment = loanMetricDTO.getMonthlyPayment();

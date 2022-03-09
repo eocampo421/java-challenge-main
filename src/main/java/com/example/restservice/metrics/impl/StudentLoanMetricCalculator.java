@@ -18,6 +18,7 @@ public class StudentLoanMetricCalculator implements ILoanMetricCalculator {
     private static final int MINIMUM_AGE = 18;
     private static final int MAXIMUM_AGE = 29;
     private static final double CHARGE = 0.8;
+    private static final String AGE_NOT_ALLOWED = "Age not allowed for the student metric loan";
 
     @Override
     public boolean isSupported(final LoanVO loanVO) {
@@ -56,6 +57,6 @@ public class StudentLoanMetricCalculator implements ILoanMetricCalculator {
         return Optional.ofNullable(age)
             .map(isInRange -> between(MINIMUM_AGE, MAXIMUM_AGE).contains(age))
             .filter(isAgeAllowed -> isAgeAllowed)
-            .orElseThrow(() -> new LoanNotValidDataException(""));
+            .orElseThrow(() -> new LoanNotValidDataException(AGE_NOT_ALLOWED));
     }
 }

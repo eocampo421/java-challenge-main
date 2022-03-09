@@ -7,7 +7,6 @@ import lombok.Value;
 @Value
 public class LoanIdVO {
 
-    private static final String INVALID_LOAN_ID = "The loanId is not valid";
     private static final String NULL_LOAN_ID = "The loanId cannot be null or empty.";
 
     Long id;

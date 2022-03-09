@@ -34,7 +34,8 @@ public class LoanController implements ILoanController {
     @PostMapping(value = "/calculate-metric", consumes = APPLICATION_JSON_VALUE,
         produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<LoanMetricDTO> calculateLoanMetric(@RequestBody final LoanDTO loanDTO) {
-        val loanVO = new LoanVO(loanDTO);
+        final LoanVO loanVO = new LoanVO(loanDTO);
+        log.info("Calculating the loan metric to the: [loanId={}]", loanVO.getLoanId());
         val response = loanService.calculateLoanMetric(loanVO);
 
         return new ResponseEntity<>(response, OK);
@@ -43,7 +44,7 @@ public class LoanController implements ILoanController {
     @Override
     @GetMapping(value = "calculate-metric/{loanId}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<LoanMetricDTO> calculateLoanMetric(@PathVariable final Long loanId) {
-        val loanIdVO = new LoanIdVO(loanId);
+        final LoanIdVO loanIdVO = new LoanIdVO(loanId);
         log.info("Calculating the loan metric to the: [loanId={}]", loanIdVO.getId());
         val response = loanService.calculateLoanMetric(loanIdVO.getId());
 
@@ -53,8 +54,8 @@ public class LoanController implements ILoanController {
     @Override
     @GetMapping(value = "/{loanId}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<LoanVO> getLoan(@PathVariable final Long loanId) {
-        LoanIdVO loanIdVO = new LoanIdVO(loanId);
-        log.info("Getting the loan");
+        final LoanIdVO loanIdVO = new LoanIdVO(loanId);
+        log.info("Getting the loan to [loanId={}]", loanId);
         var response = loanService.getLoan(loanIdVO.getId());
 
         return new ResponseEntity<>(response, OK);

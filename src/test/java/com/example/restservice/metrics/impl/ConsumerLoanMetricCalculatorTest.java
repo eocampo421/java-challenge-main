@@ -37,6 +37,10 @@ class ConsumerLoanMetricCalculatorTest {
         assertThat(consumerLoanMetric.getMonthlyPayment()).isEqualTo(443.20D);
     }
 
+    /////////////////////
+    // Private Methods //
+    /////////////////////
+
     private LoanVO getLoanVO(final String loanType) {
         return LoanVO.builder()
             .loanId(4L)
